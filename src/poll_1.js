@@ -1,11 +1,11 @@
-const addRow = (id, title, cover, votes, canVote) => {
+const addRow = (id, title, cover, votes, canVote, count) => {
     const element = document.createElement('tr');
     element.innerHTML = `
     <tr>
       <td class="px-6 py-4 whitespace-nowrap">
         <div class="flex items-center">
           <div class="flex-shrink-0">
-            <h1>${title}</h1>
+            <h1>${count}</h1>
             </div>
         </div>
       </td>
@@ -108,7 +108,7 @@ App = {
             const movie = await instance.movies.call(i);
             const movieID = movie[0].toNumber();
             const userCanVote = userVotes < maxVotesPerUser;
-
+            let count = 1;
             if(movie[1].toString() == "1"){
                 addRow(
                     movieID,  // ID
@@ -116,6 +116,7 @@ App = {
                     movie[2].toString(),  // Cover
                     movie[3].toNumber(),  // Votes
                     userCanVote,
+                    count, //counter
                 );
             }
             console.log(movieID, movie);
@@ -153,7 +154,8 @@ App = {
         event.preventDefault();
 
         const inputs = event.target.elements;
-        const title = inputs['title'].value;
+        // const title = inputs['title'].value;
+        const title = "1";
         const cover = inputs['coverUrl'].value;
 
         App.contracts.Voting.deployed().then(function (instance) {
