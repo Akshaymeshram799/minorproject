@@ -15,11 +15,16 @@ const addRow = (id, title, cover, votes, canVote, count) => {
             ? `<a data-id="${id}" href="#" class="get-started-btn btn-vote text-white-600 hover:text-indigo-900">Vote!</a>`
             : 'no votes left'
         }
+
+        <div id="progress"></div>
       </td>
     </tr>
     `;
 
     document.getElementById("movies").appendChild(element);
+
+    // let progress = document.getElementsByClassName("bar");
+    // progress.style=""
 }
 
 console.log("You are in poll 1");
