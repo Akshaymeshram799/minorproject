@@ -118,6 +118,7 @@ App = {
                     userCanVote,
                     count, //counter
                 );
+                count++;
             }
             console.log(movieID, movie);
 
