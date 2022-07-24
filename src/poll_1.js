@@ -2,18 +2,12 @@ const addRow = (id, title, cover, votes, canVote, count) => {
     const element = document.createElement('tr');
     element.innerHTML = `
     <tr>
-      <td class="px-6 py-4 whitespace-nowrap">
-        <div class="flex items-center">
-          <div class="flex-shrink-0">
-            <h1>${count}</h1>
-            </div>
-        </div>
-      </td>
+      
       <td class="px-6 py-4">${cover}</td>
       <td class="px-6 py-4">${votes}</td>
       <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
         ${canVote
-            ? `<a data-id="${id}" href="#" class="btn-vote text-indigo-600 hover:text-indigo-900">Vote!</a>`
+            ? `<a data-id="${id}" href="#" class="get-started-btn btn-vote text-indigo-600 hover:text-indigo-900">Vote!</a>`
             : 'no votes left'
         }
       </td>
@@ -110,6 +104,7 @@ App = {
             const userCanVote = userVotes < maxVotesPerUser;
             let count = 1;
             if(movie[1].toString() == "1"){
+                count = count+1;
                 addRow(
                     movieID,  // ID
                     movie[1].toString(),  // Title
@@ -118,9 +113,8 @@ App = {
                     userCanVote,
                     count, //counter
                 );
-                count++;
             }
-            console.log(movieID, movie);
+            console.log(i, movieID, movie, count);
 
             if (!userCanVote) {
                 document.getElementById("form-new-movie").remove()
