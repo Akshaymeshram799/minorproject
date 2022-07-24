@@ -1,4 +1,9 @@
+let totalVotes = 0;
+let votesArr = [];
 const addRow = (id, title, cover, votes, canVote, count) => {
+    totalVotes+= votes;
+    votesArr.push(votes);
+    console.log(totalVotes, votesArr);
     const element = document.createElement('tr');
     element.innerHTML = `
     <tr>
@@ -7,7 +12,7 @@ const addRow = (id, title, cover, votes, canVote, count) => {
       <td class="px-6 py-4">${votes}</td>
       <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
         ${canVote
-            ? `<a data-id="${id}" href="#" class="get-started-btn btn-vote text-indigo-600 hover:text-indigo-900">Vote!</a>`
+            ? `<a data-id="${id}" href="#" class="get-started-btn btn-vote text-white-600 hover:text-indigo-900">Vote!</a>`
             : 'no votes left'
         }
       </td>
@@ -16,6 +21,7 @@ const addRow = (id, title, cover, votes, canVote, count) => {
 
     document.getElementById("movies").appendChild(element);
 }
+
 console.log("You are in poll 1");
 App = {
     account: null,
@@ -174,3 +180,6 @@ App = {
 window.addEventListener('load', function (event) {
     App.init();
 });
+
+//Style section
+
