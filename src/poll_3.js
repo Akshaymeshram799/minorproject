@@ -7,7 +7,7 @@ const addRow = (id, title, cover, votes, canVote, count) => {
       <td class="px-6 py-4">${votes}</td>
       <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
         ${canVote
-            ? `<a data-id="${id}" href="#" class="get-started-btn btn-vote text-indigo-600 hover:text-indigo-900">Vote!</a>`
+            ? `<a data-id="${id}" href="#" class="get-started-btn btn-vote text-white-600 hover:text-indigo-900">Vote!</a>`
             : 'no votes left'
         }
       </td>
