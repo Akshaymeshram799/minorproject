@@ -1,9 +1,10 @@
 let totalVotes = 0;
+let itr = 0;
 let votesArr = [];
-const addRow = (id, title, cover, votes, canVote, count) => {
+const addRow = (id, title, cover, votes, canVote, i) => {
     totalVotes+= votes;
     votesArr.push(votes);
-    console.log(totalVotes, votesArr);
+    // console.log(i, " index");
     const element = document.createElement('tr');
     element.innerHTML = `
     <tr>
@@ -15,16 +16,21 @@ const addRow = (id, title, cover, votes, canVote, count) => {
             ? `<a data-id="${id}" href="#" class="get-started-btn btn-vote text-white-600 hover:text-indigo-900">Vote!</a>`
             : 'no votes left'
         }
-
-        <div id="progress"></div>
       </td>
     </tr>
     `;
 
     document.getElementById("movies").appendChild(element);
+    // let progress = document.getElementById("progress");  
+    let bar = document.getElementById("bar"+i);
+    let firstBar = (votesArr[itr]/totalVotes)*100;
+    console.log(votesArr[itr], " votesArr" );
+    console.log()
+    itr++;
+    
+    // progress.style="width:100%;border:2px solid black; padding:3px;border-radius:4px;";
+    // bar.style=`width:${firstBar}%; background-color:red;`
 
-    // let progress = document.getElementsByClassName("bar");
-    // progress.style=""
 }
 
 console.log("You are in poll 1");
@@ -115,14 +121,14 @@ App = {
             const userCanVote = userVotes < maxVotesPerUser;
             let count = 1;
             if(movie[1].toString() == "1"){
-                count = count+1;
+                // count = count+1;
                 addRow(
                     movieID,  // ID
                     movie[1].toString(),  // Title
                     movie[2].toString(),  // Cover
                     movie[3].toNumber(),  // Votes
                     userCanVote,
-                    count, //counter
+                    i, //counter
                 );
             }
             console.log(i, movieID, movie, count);
@@ -148,6 +154,7 @@ App = {
             instance.vote(movieID, { from: App.account }).then(function (address) {
                 console.log(`Successfully voted on ${movieID}`, address);
                 alert(`Successfully voted on ${movieID}`, address);
+                
             }).catch(function (err) {
                 console.error(err);
             });
@@ -166,8 +173,8 @@ App = {
 
         App.contracts.Voting.deployed().then(function (instance) {
             instance.addMovie(title, cover, { from: App.account }).then(function () {
-                console.log(`Successfully added movie ${title}`);
-                alert(`Successfully added Poll ${title}`);
+                console.log(`Successfully added poll ${cover}`);
+                alert(`Successfully added Poll ${cover}`);
                 event.target.reset();
             }).catch(function (err) {
                 console.error(err);
